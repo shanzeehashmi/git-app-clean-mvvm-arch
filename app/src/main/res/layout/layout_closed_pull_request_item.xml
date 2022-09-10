@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+        <variable
+            name="pullrequest"
+            type="com.zeeshan.gitapp.domain.model.PullRequest" />
+    </data>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="20dp"
+    app:contentPadding="10dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/pr_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(pullrequest.prNumber)}"
+            />
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{pullrequest.userProfile.userName}"
+        />
+
+    <TextView
+        android:id="@+id/created_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{pullrequest.createdDate}"
+        />
+
+        <TextView
+            android:id="@+id/closed_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{pullrequest.closedDate}"
+            />
+
+        <TextView
+            android:id="@+id/pr_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{pullrequest.title}"
+            />
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+</layout>

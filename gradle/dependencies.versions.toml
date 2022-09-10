@@ -1,0 +1,32 @@
+[versions]
+androidXCoreKTX = "1.8.0"
+androidXLifecycle = "2.5.1"
+androidMaterial = "1.6.1"
+junit = "4.13.2"
+extJunit = "1.1.3"
+retrofit = "2.9.0"
+retrofitConverterGson = "2.9.0"
+okhttpInterceptor = "5.0.0-alpha.2"
+hilt = "2.42"
+hiltCompiler = "1.0.0"
+coroutine = "1.6.1"
+viewmodelKTX = "2.5.1"
+activityKTX = "1.5.1"
+
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidXCoreKTX" }
+google-material = { group = "com.google.android.material", name = "material", version.ref = "androidMaterial" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-core-ktx = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
+
+
+
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidXCoreKTX" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidXCoreKTX" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidXCoreKTX" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidXCoreKTX" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidXCoreKTX" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidXCoreKTX" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidXCoreKTX" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidXCoreKTX" }
