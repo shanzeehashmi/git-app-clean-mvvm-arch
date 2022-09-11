@@ -1,4 +1,4 @@
-package com.zeeshan.gitapp.data.data_source.remote.retrofit.adapters.paging
+package com.zeeshan.gitapp.data.data_source.remote.network.adapters.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
@@ -32,12 +32,12 @@ class PullRequestPagingSource(private val apiService: GitRepoServiceApi) :
                 val nextKey = if (response.data.isEmpty()) {
                     null
                 } else {
-                    pageNumber + (params.loadSize / Constants.ITEM_PER_PAGE)
+                    pageNumber.plus(1)
                 }
 
                 LoadResult.Page(
                     data = response.data,
-                    prevKey = null, // Only paging forward.
+                    prevKey = null,
                     nextKey = nextKey
                 )
             }

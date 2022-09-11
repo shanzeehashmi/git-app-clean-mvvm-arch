@@ -1,11 +1,20 @@
-package com.zeeshan.gitapp.data.data_source.remote.retrofit.adapters.networkrequest
+package com.zeeshan.gitapp.data.data_source.remote.network.adapters.networkrequest
 
+import com.google.gson.Gson
 import com.zeeshan.gitapp.common.NetworkResult
+import com.zeeshan.gitapp.data.data_source.remote.network.error.NetworkErrorBody
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.components.SingletonComponent
 import okhttp3.Request
+import okhttp3.ResponseBody
 import okio.Timeout
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.Converter
 import retrofit2.Response
+import javax.inject.Inject
 
 internal class NetworkResultCall<T : Any>(
     private val proxy: Call<T>
@@ -43,12 +52,17 @@ internal class NetworkResultCall<T : Any>(
 //                            )
 //                        }
                     } else {
+                        var errorMessage: String = ""
+                        response.errorBody()?.let{
+                            errorMessage = Gson().fromJson(it.string(), NetworkErrorBody::class.java).errorMessage ?: ""
+                        }
+
                         callback.onResponse(
                             this@NetworkResultCall,
                             Response.success(
                                 NetworkResult.Error(
                                     errorCode = response.code(),
-                                    errorMessage = response.message()
+                                    errorMessage = errorMessage
                                 )
                             )
                         )

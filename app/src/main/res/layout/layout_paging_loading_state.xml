@@ -27,7 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginHorizontal="10dp"
-        android:text="@string/retry"/>
+        android:layout_centerVertical="true"
+        android:text="@string/retry" />
 
 </RelativeLayout>
 

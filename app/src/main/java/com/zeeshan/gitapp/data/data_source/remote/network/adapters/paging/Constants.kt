@@ -1,4 +1,4 @@
-package com.zeeshan.gitapp.data.data_source.remote.retrofit.adapters.paging
+package com.zeeshan.gitapp.data.data_source.remote.network.adapters.paging
 
 object Constants {
     const val DEFAULT_PAGE = 1

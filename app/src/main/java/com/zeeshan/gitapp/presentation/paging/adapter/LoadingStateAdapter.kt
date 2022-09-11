@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.zeeshan.gitapp.R
 import com.zeeshan.gitapp.databinding.LayoutPagingLoadingStateBinding
+import java.net.UnknownHostException
 
 class LoadingStateAdapter(private val retry: () -> Unit) :
     LoadStateAdapter<LoadingStateAdapter.LoadingStateViewHolder>() {
@@ -34,7 +36,13 @@ class LoadingStateAdapter(private val retry: () -> Unit) :
                 }
 
                 is LoadState.Error -> {
-                    binding.pagingErrorMessage.text = loadState.error.message
+                    if(loadState.error is UnknownHostException){
+                        binding.pagingErrorMessage.text = binding.root.context.resources.getString(R.string.please_check_your_internet_connection_and_retry)
+                    }else{
+                        binding.pagingErrorMessage.text = loadState.error.localizedMessage
+                    }
+
+                    binding.pagingErrorMessage.visibility = View.VISIBLE
                     binding.retryBtn.visibility = View.VISIBLE
                 }
 

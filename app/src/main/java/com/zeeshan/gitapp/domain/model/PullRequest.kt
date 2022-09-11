@@ -10,9 +10,9 @@ data class PullRequest(
     @SerializedName("title")
     val title: String,
     @SerializedName("created_at")
-    val createdDate: String,
+    var createdDate: String,
     @SerializedName("closed_at")
-    val closedDate: String,
+    var closedDate: String,
     @SerializedName("user")
     val userProfile: UserProfile
 )

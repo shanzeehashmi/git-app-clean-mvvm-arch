@@ -1,7 +1,6 @@
-package com.zeeshan.gitapp.data.data_source.remote.retrofit.adapters.networkrequest
+package com.zeeshan.gitapp.data.data_source.remote.network.adapters.networkrequest
 
 import com.zeeshan.gitapp.common.NetworkResult
-import com.zeeshan.gitapp.data.data_source.remote.retrofit.NetworkResultCallAdapter
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Retrofit
