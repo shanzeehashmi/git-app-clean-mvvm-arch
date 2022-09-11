@@ -2,7 +2,7 @@ package com.zeeshan.gitapp.di
 
 import com.zeeshan.gitapp.common.Constant
 import com.zeeshan.gitapp.data.data_source.remote.GitRepoServiceApi
-import com.zeeshan.gitapp.data.data_source.remote.network.adapters.networkrequest.NetworkResultCallAdapterFactory
+import com.zeeshan.gitapp.data.data_source.remote.network.retrofit.retrofit_adapters.NetworkResultCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

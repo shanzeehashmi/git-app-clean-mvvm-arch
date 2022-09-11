@@ -1,4 +1,4 @@
-package com.zeeshan.gitapp.data.data_source.remote.network.adapters.paging
+package com.zeeshan.gitapp.data.data_source.remote.network.paging_source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
@@ -7,7 +7,7 @@ import com.zeeshan.gitapp.common.PullRequestType
 import com.zeeshan.gitapp.data.data_source.remote.GitRepoServiceApi
 import com.zeeshan.gitapp.domain.model.PullRequest
 
-class PullRequestPagingSource(private val apiService: GitRepoServiceApi) :
+class PullRequestRemotePagingSource(private val apiService: GitRepoServiceApi) :
     PagingSource<Int, PullRequest>() {
 
     override fun getRefreshKey(state: PagingState<Int, PullRequest>): Int? {

@@ -1,4 +1,4 @@
-package com.zeeshan.gitapp.domain.usecases
+package com.zeeshan.gitapp.domain.use_cases
 
 import androidx.paging.PagingData
 import com.zeeshan.gitapp.domain.model.PullRequest

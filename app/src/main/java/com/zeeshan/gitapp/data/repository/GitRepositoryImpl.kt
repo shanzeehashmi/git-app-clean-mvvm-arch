@@ -4,8 +4,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.zeeshan.gitapp.data.data_source.remote.GitRepoServiceApi
-import com.zeeshan.gitapp.data.data_source.remote.network.adapters.paging.Constants
-import com.zeeshan.gitapp.data.data_source.remote.network.adapters.paging.PullRequestPagingSource
+import com.zeeshan.gitapp.data.data_source.remote.network.paging_source.Constants
+import com.zeeshan.gitapp.data.data_source.remote.network.paging_source.PullRequestRemotePagingSource
 import com.zeeshan.gitapp.domain.model.PullRequest
 import com.zeeshan.gitapp.domain.repository.GitRepository
 import kotlinx.coroutines.flow.Flow
@@ -20,7 +20,7 @@ class GitRepositoryImpl @Inject constructor(private val api: GitRepoServiceApi) 
                     pageSize = Constants.ITEM_PER_PAGE,
                     enablePlaceholders = false
                 ),
-                pagingSourceFactory = { PullRequestPagingSource(api) }
+                pagingSourceFactory = { PullRequestRemotePagingSource(api) }
             ).flow
 
     }

@@ -4,4 +4,5 @@
     <string name="created">Created</string>
     <string name="closed">Closed</string>
     <string name="please_check_your_internet_connection_and_retry">Please check your internet connection and retry</string>
+    <string name="we_dont_have_closed_any_pull_request_for_this_repo">We dont have any closed pull request for this repo</string>
 </resources>

@@ -1,20 +1,13 @@
-package com.zeeshan.gitapp.data.data_source.remote.network.adapters.networkrequest
+package com.zeeshan.gitapp.data.data_source.remote.network.retrofit.retrofit_adapters
 
 import com.google.gson.Gson
 import com.zeeshan.gitapp.common.NetworkResult
-import com.zeeshan.gitapp.data.data_source.remote.network.error.NetworkErrorBody
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.components.SingletonComponent
+import com.zeeshan.gitapp.data.data_source.remote.network.retrofit.error.NetworkErrorBody
 import okhttp3.Request
-import okhttp3.ResponseBody
 import okio.Timeout
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Converter
 import retrofit2.Response
-import javax.inject.Inject
 
 internal class NetworkResultCall<T : Any>(
     private val proxy: Call<T>
@@ -39,18 +32,6 @@ internal class NetworkResultCall<T : Any>(
                             Response.success(NetworkResult.UnknownError())
                         )
 
-//                        if (body != null) {
-//                            callback.onResponse(
-//                                this@NetworkResultCall,
-//                                Response.success(NetworkResult.Success(body))
-//                            )
-//                        } else {
-//                            // Body is null even though api is successful, so return the unknown error
-//                            callback.onResponse(
-//                                this@NetworkResultCall,
-//                                Response.success(NetworkResult.UnknownError())
-//                            )
-//                        }
                     } else {
                         var errorMessage: String = ""
                         response.errorBody()?.let{

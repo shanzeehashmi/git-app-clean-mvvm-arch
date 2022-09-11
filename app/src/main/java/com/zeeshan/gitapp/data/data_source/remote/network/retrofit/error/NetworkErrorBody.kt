@@ -1,4 +1,4 @@
-package com.zeeshan.gitapp.data.data_source.remote.network.error
+package com.zeeshan.gitapp.data.data_source.remote.network.retrofit.error
 
 import com.google.gson.annotations.SerializedName
 

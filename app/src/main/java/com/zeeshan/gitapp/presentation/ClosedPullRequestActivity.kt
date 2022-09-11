@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.zeeshan.gitapp.R
 import com.zeeshan.gitapp.common.UIState
 import com.zeeshan.gitapp.databinding.ActivityClosedPullRequestBinding
 import com.zeeshan.gitapp.presentation.paging.adapter.LoadingStateAdapter
@@ -33,7 +34,7 @@ class ClosedPullRequestActivity : AppCompatActivity() {
 
         setupPagingRv()
         if (savedInstanceState == null) {
-            fetchPullRequests()
+            fetchClosedPullRequests()
         }
 
         viewModel.openPullRequest.observe(this) {
@@ -96,13 +97,14 @@ class ClosedPullRequestActivity : AppCompatActivity() {
         binding.errorHandlingLayout.visibility = View.VISIBLE
         binding.offlineIcon.visibility = View.VISIBLE
         binding.errorMessageTv.visibility = View.VISIBLE
-        binding.errorMessageTv.text = "Please check your internet and retry"
+        binding.errorMessageTv.text =
+            binding.errorMessageTv.context.resources.getString(R.string.please_check_your_internet_connection_and_retry)
         binding.retryBtn.visibility = View.VISIBLE
         binding.retryBtn.isClickable = true
     }
 
-    private fun fetchPullRequests() {
-        viewModel.getPullRequestFlow()
+    private fun fetchClosedPullRequests() {
+        viewModel.getClosedPullRequestFlow()
     }
 
     private fun setupPagingRv() {
@@ -127,7 +129,7 @@ class ClosedPullRequestActivity : AppCompatActivity() {
 
                         if (loadStates.refresh is LoadState.NotLoading && pagingAdapter.itemCount == 0) {
                             showError(
-                                "We dont have any closed pull request for this repo",
+                                binding.root.context.resources.getString(R.string.we_dont_have_closed_any_pull_request_for_this_repo),
                                 showRetry = false
                             )
                         }
