@@ -1,33 +1,19 @@
 package com.zeeshan.gitapp.paging_test
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.Observer
-import androidx.paging.PagingData
-import com.zeeshan.gitapp.common.UIState
-import com.zeeshan.gitapp.data.data_source.remote.GitRepoServiceApi
-import com.zeeshan.gitapp.data.repository.GitRepositoryImpl
+import androidx.paging.PagingSource
+import com.zeeshan.gitapp.data.data_source.remote.network.paging_source.PullRequestRemotePagingSource
 import com.zeeshan.gitapp.domain.model.PullRequest
-import com.zeeshan.gitapp.domain.use_cases.GetClosedPrUseCase
-import com.zeeshan.gitapp.domain.use_cases.PrUseCase
-import com.zeeshan.gitapp.presentation.viewmodels.PullRequestViewModel
+import com.zeeshan.gitapp.faketest.FakeGitRepoServiceApi
 import com.zeeshan.gitapp.utils.MainCoroutineScopeRule
-import com.zeeshan.gitapp.utils.getValueForTest
-import dagger.hilt.android.testing.HiltAndroidTest
-import junit.framework.Assert.assertNotNull
-import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
-import okhttp3.OkHttpClient
-import okhttp3.mockwebserver.MockWebServer
+import kotlinx.coroutines.test.runTest
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 @RunWith(MockitoJUnitRunner::class)
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -39,48 +25,34 @@ class PullRequestRemotePagingShould {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private val server = MockWebServer()
-    private lateinit var repository: GitRepoServiceApi
-    private lateinit var prUseCase: PrUseCase
-    private lateinit var viewModel: PullRequestViewModel
+    private lateinit var mockPullRequestList: List<PullRequest>
 
     @Before
     fun init() {
-        server.start()
-        var BASE_URL = server.url("/").toString()
-        val okHttpClient = OkHttpClient
-            .Builder()
-            .build()
-        val service = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL)
-            .client(okHttpClient)
-            .build()
 
-        repository = service.create(GitRepoServiceApi::class.java)
-
-        prUseCase = PrUseCase(GetClosedPrUseCase(GitRepositoryImpl(repository)))
-
-        viewModel = PullRequestViewModel(prUseCase)
+        mockPullRequestList = PullRequestFactory.mockPullRequestList
 
     }
 
-    @Mock
-    private lateinit var observer: Observer<in UIState<PagingData<PullRequest>>>
+    @Test
+    fun loadPaginatedPageSuccessfully() = runTest {
+        val pagingSource = PullRequestRemotePagingSource(FakeGitRepoServiceApi())
 
-        private val postFactory = PostFactory()
-        private val mockPosts = listOf(
-            postFactory.createRedditPost(DEFAULT_SUBREDDIT),
-            postFactory.createRedditPost(DEFAULT_SUBREDDIT),
-            postFactory.createRedditPost(DEFAULT_SUBREDDIT)
+        val expected = PagingSource.LoadResult.Page(
+            data = mockPullRequestList,
+            prevKey = null,
+            nextKey = 2
         )
-        private val mockApi = MockRedditApi().apply {
-            mockPosts.forEach { post -> addPost(post) }
-        }
 
-        @Test
-        fun loadReturnsPageWhenOnSuccessfulLoadOfItemKeyedData() = runTest {
-            val pagingSource = ItemKeyedSubredditPagingSource(mockApi, DEFAULT_SUBREDDIT)
-        }
+        val actual = pagingSource.load(
+            PagingSource.LoadParams.Refresh(
+                key = null,
+                loadSize = 5,
+                placeholdersEnabled = false
+            )
+        )
+
+        Assert.assertEquals(expected, actual)
+    }
 
 }

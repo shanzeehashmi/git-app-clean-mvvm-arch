@@ -3,10 +3,9 @@ package com.zeeshan.gitapp.faketest
 import com.zeeshan.gitapp.common.NetworkResult
 import com.zeeshan.gitapp.data.data_source.remote.GitRepoServiceApi
 import com.zeeshan.gitapp.domain.model.PullRequest
-import com.zeeshan.gitapp.domain.model.UserProfile
 import com.zeeshan.gitapp.paging_test.PullRequestFactory
 
-class FakeGitApi : GitRepoServiceApi {
+class FakeGitRepoServiceApi : GitRepoServiceApi {
 
     private val mockPullRequestList = PullRequestFactory.mockPullRequestList
     override suspend fun fetchPullRequest(
